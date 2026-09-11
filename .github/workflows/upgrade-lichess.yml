@@ -1,0 +1,17 @@
+name: Upgrade Lichess Account
+
+on:
+  workflow_dispatch:
+
+jobs:
+  upgrade:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Upgrade account to bot
+        run: |
+          curl --fail-with-body \
+            -X POST \
+            -H "Authorization: Bearer $LICHESS_TOKEN" \
+            https://lichess.org/api/bot/account/upgrade
+        env:
+          LICHESS_TOKEN: ${{ secrets.LICHESS_TOKEN }}
